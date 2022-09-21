@@ -15,15 +15,24 @@ import MarkDown from './md-content';
 
 /**
  * Track Detail component renders the main content of a given track:
- * author, length, number of views, modules list, among other things.
+ * author, durationInSeconds, number of views, modules list, among other things.
  * It provides access to the first module of the track.
  */
 const TrackDetail = ({ track }) => {
-  const { title, description, thumbnail, author, length, modulesCount, modules, numberOfViews } = track;
+  const {
+    title,
+    description,
+    thumbnail,
+    author,
+    durationInSeconds,
+    modulesCount,
+    modules,
+    numberOfViews,
+  } = track;
 
   return (
     <ContentSection>
-      <CoverImage src={thumbnail} alt="" />
+      <CoverImage src={thumbnail} alt='' />
       <TrackDetails>
         <DetailRow>
           <h1>{title}</h1>
@@ -32,16 +41,16 @@ const TrackDetail = ({ track }) => {
           <DetailItem>
             <h4>Track details</h4>
             <IconAndLabel>
-              <IconView width="16px" />
-              <div id="viewCount">{numberOfViews} view(s)</div>
+              <IconView width='16px' />
+              <div id='viewCount'>{numberOfViews} view(s)</div>
             </IconAndLabel>
             <IconAndLabel>
-              <IconBook width="14px" height="14px" />
+              <IconBook width='14px' height='14px' />
               <div>{modulesCount} modules</div>
             </IconAndLabel>
             <IconAndLabel>
-              <IconTime width="14px" />
-              <div>{humanReadableTimeFromSeconds(length)}</div>
+              <IconTime width='14px' />
+              <div>{humanReadableTimeFromSeconds(durationInSeconds)}</div>
             </IconAndLabel>
           </DetailItem>
           <DetailItem>
@@ -52,9 +61,9 @@ const TrackDetail = ({ track }) => {
           <div>
             <StyledLink to={`./module/${modules[0]['id']}`}>
               <Button
-                icon={<IconRun width="20px" />}
+                icon={<IconRun width='20px' />}
                 color={colors.pink.base}
-                size="large"
+                size='large'
               >
                 Start Track
               </Button>
@@ -68,7 +77,9 @@ const TrackDetail = ({ track }) => {
               {modules.map((module) => (
                 <li key={module.title}>
                   <div>{module.title}</div>
-                  <ModuleLength>{humanReadableTimeFromSeconds(module.length)}</ModuleLength>
+                  <ModuleLength>
+                    {humanReadableTimeFromSeconds(module.length)}
+                  </ModuleLength>
                 </li>
               ))}
             </ul>
